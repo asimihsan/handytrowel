@@ -113,7 +113,7 @@ public class Main {
         .build()
         .analyze();
         List<String> tokens = analyzer.getTokens();
-        
+
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         Map<String, Object> articleData = new HashMap<>();
@@ -121,16 +121,16 @@ public class Main {
         articleData.put("links", links);
         articleData.put("tokens", tokens);
         try {
-			mapper.writeValue(System.out, articleData);
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-			System.exit(1);
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-			System.exit(1);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+            mapper.writeValue(System.out, articleData);
+        } catch (JsonGenerationException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 }

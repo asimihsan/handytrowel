@@ -71,24 +71,24 @@ public class TextAnalyzer {
         this.body = builder.body;
     }
 
-	/**
-	 * List of tokens that are created by a call to analyze() and then
-	 * retrieved by a call to getTokens()
-	 */
+    /**
+     * List of tokens that are created by a call to analyze() and then
+     * retrieved by a call to getTokens()
+     */
     private final List<String> tokens = new LinkedList<>();
-    
+
     /**
      * Regular expression object that matches for punctuation. Note that
      * this also matches full stops, so we lose sentence information.
-     * 
+     *
      * Sometimes Stanford CoreNLP's tokenizer spits out "'s" and 'n't" on
      * its own, so we ignore single letters before/after punctuation too.
-     * 
+     *
      * Note that Stanford CoreNLP helpfully points out brackets with
      * -lrb- and -rrb-. Let's chuck those too.
      */
     private final Pattern punctuation = Pattern.compile("(?:[a-z]?[\\p{Punct}]+[a-z]?|-[lr].b-)");
-    
+
     /**
      * A compiled number regular expression so we can replace all using it
      * with $NUMBER.
@@ -111,11 +111,11 @@ public class TextAnalyzer {
         props.setProperty("customAnnotatorClass.stopword", "com.asimihsan.handytrowel.nlp.StopwordAnnotator");
         List<String> stopWords = null;
         try {
-			stopWords = WordReader.WordReaderWithResourcePath("/nlp/top1000words.txt").getWords();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return this;
-		}
+            stopWords = WordReader.WordReaderWithResourcePath("/nlp/top1000words.txt").getWords();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return this;
+        }
         String customStopWordList = Joiner.on(",").join(stopWords);
         props.setProperty(StopwordAnnotator.STOPWORDS_LIST, customStopWordList);
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
@@ -126,17 +126,17 @@ public class TextAnalyzer {
         for (CoreLabel token : inputTokens) {
             Pair<Boolean, Boolean> stopword = token.get(StopwordAnnotator.class);
             if (stopword.first())
-            	continue;
+                continue;
             String word = token.word().toLowerCase();
-            
+
             //!!AI TODO this sucks, should make another annotator and make it optional etc.
             //also we're matching full stops! so we lose sentence information.
             if (punctuation.matcher(word).matches())
-            	continue;
-            	
+                continue;
+
             //!AI TODO again this would be its own annotator and optional
             word = number.matcher(word).replaceAll("NUMBER");
-            
+
             stemmer.setCurrent(word);
             stemmer.stem();
             word = stemmer.getCurrent();
