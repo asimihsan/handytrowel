@@ -51,10 +51,10 @@ public class WordReader {
     public List<String> getWords() throws IOException {
         List<String> words = new LinkedList<>();
         try (
-            InputStream is = getClass().getResourceAsStream(this.resourcePath);
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-        ) {
+                InputStream is = getClass().getResourceAsStream(this.resourcePath);
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+            ) {
             String line = null;
             while ((line = br.readLine()) != null) {
                 if (line.startsWith("#"))
