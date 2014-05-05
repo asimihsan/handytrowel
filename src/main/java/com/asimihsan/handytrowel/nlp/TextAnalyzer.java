@@ -111,7 +111,7 @@ public class TextAnalyzer {
         props.setProperty("customAnnotatorClass.stopword", "com.asimihsan.handytrowel.nlp.StopwordAnnotator");
         List<String> stopWords = null;
         try {
-            stopWords = WordReader.WordReaderWithResourcePath("/nlp/top1000words.txt").getWords();
+            stopWords = WordReader.wordReaderWithResourcePath("/nlp/top1000words.txt").getWords();
         } catch (IOException e) {
             e.printStackTrace();
             return this;
