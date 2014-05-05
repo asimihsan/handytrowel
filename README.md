@@ -1,5 +1,7 @@
 # handytrowel
 
+[![Build Status](https://travis-ci.org/asimihsan/handytrowel.svg?branch=master)](https://travis-ci.org/asimihsan/handytrowel)
+
 Scrape news articles, output extracted article text and normalized/processed
 ngrams
 
