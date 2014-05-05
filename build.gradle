@@ -1,5 +1,5 @@
 /** ========================================================================
-  * handytrowel: build.grade
+  * handytrowel: build.gradle
   * Gradle build file used for running tests and creating artifacts.
   * ========================================================================
   * Copyright (c) 2014, Asim Ihsan, All rights reserved.
