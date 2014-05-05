@@ -50,6 +50,7 @@ dependencies {
     compile "edu.stanford.nlp:stanford-corenlp:3.3.1"
     compile "edu.stanford.nlp:stanford-corenlp:3.3.1:models"
     compile "org.apache.lucene:lucene-core:3.6.2"
+    compile "org.eclipse.jetty:jetty-server:9.2.0.M0"
     compile "org.kohsuke.args4j:args4j-maven-plugin:2.0.26"
     compile "org.seleniumhq.selenium:selenium-server:2.41.0"
     compile "org.slf4j:slf4j-api:1.7.7"
