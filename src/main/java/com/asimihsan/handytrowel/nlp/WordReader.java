@@ -27,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class WordReader {
         this.resourcePath = resourcePath;
     }
 
-    public static WordReader WordReaderWithResourcePath(String resourcePath) {
+    public static WordReader wordReaderWithResourcePath(String resourcePath) {
         WordReader reader = new WordReader(resourcePath);
         return reader;
     }
@@ -52,7 +53,7 @@ public class WordReader {
         List<String> words = new LinkedList<>();
         try (
                 InputStream is = getClass().getResourceAsStream(this.resourcePath);
-                InputStreamReader isr = new InputStreamReader(is);
+                InputStreamReader isr = new InputStreamReader(is, StandardCharsets.US_ASCII);
                 BufferedReader br = new BufferedReader(isr);
             ) {
             String line = null;

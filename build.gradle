@@ -25,6 +25,7 @@ apply plugin: 'application'
 apply plugin: 'eclipse'
 apply plugin: 'findbugs'
 apply plugin: 'java'
+apply plugin: 'pmd'
 
 mainClassName = "com.asimihsan.handytrowel.cli.Main"
 
@@ -32,7 +33,6 @@ applicationDefaultJvmArgs = [
     "-server",
     "-XX:+TieredCompilation",
 ]
-
 
 repositories {
     mavenCentral()

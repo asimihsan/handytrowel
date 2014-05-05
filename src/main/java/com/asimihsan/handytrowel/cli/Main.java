@@ -58,23 +58,23 @@ public class Main {
     // Positional arguments
     @Argument private List<String> arguments = new ArrayList<>();
 
-    public static void main(String[] args) throws SAXException {
+    public static void main(String[] args) throws SAXException, CmdLineException, TimeoutException, BoilerpipeProcessingException, IOException {
         new Main().doMain(args);
     }
 
-    public void doMain(String[] args) throws SAXException {
+    public void doMain(String[] args) throws SAXException, CmdLineException, TimeoutException, BoilerpipeProcessingException, IOException {
         CmdLineParser parser = new CmdLineParser(this);
         parser.setUsageWidth(80);
         try {
             parser.parseArgument(args);
             if (arguments.isEmpty())
                 throw new CmdLineException(parser, "No arguments were given");
-        } catch (CmdLineException e) {
+        } catch (final CmdLineException e) {
             System.err.println(e.getMessage());
             System.err.println("handytrowel [URL]");
             parser.printUsage(System.err);
             System.err.println();
-            System.exit(1);
+            throw e;
         }
         String url = arguments.get(0);
 
@@ -84,9 +84,9 @@ public class Main {
         String pageSource = null;
         try {
             pageSource = htmlFetcher.getPageSource(url);
-        } catch (TimeoutException e) {
-            System.err.println(e.getStackTrace());
-            System.exit(1);
+        } catch (final TimeoutException e) {
+            e.printStackTrace();
+            throw e;
         }
 
         String extractedBody = null;
@@ -104,8 +104,8 @@ public class Main {
             extractedBody = ArticleExtractor.INSTANCE.getText(pageSource);
 
         } catch (BoilerpipeProcessingException e) {
-            System.err.println(e.getStackTrace());
-            System.exit(1);
+            e.printStackTrace();
+            throw e;
         }
 
         TextAnalyzer analyzer = new TextAnalyzerBuilder()
@@ -124,13 +124,13 @@ public class Main {
             mapper.writeValue(System.out, articleData);
         } catch (JsonGenerationException e) {
             e.printStackTrace();
-            System.exit(1);
+            throw e;
         } catch (JsonMappingException e) {
             e.printStackTrace();
-            System.exit(1);
+            throw e;
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
+            throw e;
         }
     }
 }

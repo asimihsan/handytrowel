@@ -155,7 +155,7 @@ public final class LinkExtractor {
     }
 
 
-    private final class Implementation extends AbstractSAXParser implements
+    private static final class Implementation extends AbstractSAXParser implements
         ContentHandler {
         List<String> linksHighlight = new ArrayList<>();
         private List<String> linksBuffer = new ArrayList<>();
@@ -222,14 +222,12 @@ public final class LinkExtractor {
             }
 
             try {
-                if (inIgnorableElement == 0) {
-                    if(inHighlight && "A".equalsIgnoreCase(localName)) {
-                        String href = atts.getValue("href");
-                        if((href != null) &&
-                                (href.length() > 0) &&
-                                !(blackList.matcher(href).lookingAt())) {
-                            linksBuffer.add(href);
-                        }
+                if ((inIgnorableElement == 0) && (inHighlight && "A".equalsIgnoreCase(localName))) {
+                    String href = atts.getValue("href");
+                    if((href != null) &&
+                            (href.length() > 0) &&
+                            !(blackList.matcher(href).lookingAt())) {
+                        linksBuffer.add(href);
                     }
                 }
             } finally {
@@ -245,15 +243,8 @@ public final class LinkExtractor {
             if (ta != null) {
                 ta.beforeEnd(this, localName);
             }
-
-            try {
-                if (inIgnorableElement == 0) {
-                    //
-                }
-            } finally {
-                if (ta != null) {
-                    ta.afterEnd(this, localName);
-                }
+            if (ta != null) {
+                ta.afterEnd(this, localName);
             }
         }
 

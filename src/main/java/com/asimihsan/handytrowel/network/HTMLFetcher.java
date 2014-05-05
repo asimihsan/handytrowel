@@ -66,11 +66,12 @@ public class HTMLFetcher {
         this.timeoutMillis = builder.timeoutMillis;
     }
 
+    private final Logger phantomJsLogger = Logger.getLogger(PhantomJSDriverService.class.getName());
+
     public String getPageSource(final String url) throws TimeoutException {
 
         // Make the Selenium WebDriver logs be quiet
-        Logger logger = Logger.getLogger(PhantomJSDriverService.class.getName());
-        logger.setLevel(Level.OFF);
+        phantomJsLogger.setLevel(Level.OFF);
 
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.phantomjs();
         // What other CLI args there are: http://phantomjs.org/api/command-line.html
