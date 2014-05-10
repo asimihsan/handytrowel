@@ -46,7 +46,6 @@ import com.google.common.collect.Lists;
 
 import de.l3s.boilerpipe.BoilerpipeExtractor;
 import de.l3s.boilerpipe.BoilerpipeProcessingException;
-import de.l3s.boilerpipe.document.Image;
 import de.l3s.boilerpipe.document.TextBlock;
 import de.l3s.boilerpipe.document.TextDocument;
 import de.l3s.boilerpipe.sax.BoilerpipeSAXInput;
