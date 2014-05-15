@@ -13,8 +13,9 @@ ngrams
 -   Install [phantomjs](http://phantomjs.org/download.html) and put it into your system path.
     You should be able to run `phantomjs` from any directory; if not handytrowel will complain
     that it cannot find phantomjs.
-    -   Example instructions: [http://attester.ariatemplates.com/usage/phantom.html#installing_phantomjs_on_windows](http://attester.ariatemplates.com/usage/phantom.html#installing_phantomjs_on_windows)
     -   For Mac just use [Homebrew](http://brew.sh/) and run: `brew install phantomjs`.
+    -   For Windows and Linux see: [http://attester.ariatemplates.com/usage/phantom.html](http://attester.ariatemplates.com/usage/phantom.html)
+    
 
 ## Usage
 
